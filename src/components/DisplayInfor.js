@@ -1,10 +1,16 @@
 import React from "react";
 import UserInfor from "./AddUserInfor";
+import './DisplayInfor.scss'
+import logo from './../logo.svg'
 
 class DisplayInfor extends React.Component {
-    state = {
-        isShowListUser: true
+    constructor(props) {
+        console.log('>>> call constructor')
+        super(props);
+        this.state = {
+            isShowListUser: true
 
+        }
     }
 
     handleShowHide = () => {
@@ -13,31 +19,46 @@ class DisplayInfor extends React.Component {
         })
     }
 
+    componentDidMount() {
+        console.log('>>> call me ');
+        setTimeout(() => {
+            document.title = 'Bo beo'
+        }, 3000);
+    }
+
     render() {
 
-
+        console.log('>> call render')
 
         // Distructuring array/object
         const { listUsers } = this.props;
         // console.log(listUsers);
         // console.table(listUsers);
         return (
-            <div>
+            <div className="display-infor-container">
+                {/* <img src={logo} /> */}
+
                 <div>
                     <span onClick={() => { this.handleShowHide() }}>
                         {this.state.isShowListUser === true ? "Hide list user" : "Show list user"}
                     </span>
                 </div>
                 {this.state.isShowListUser &&
-                    <div>
+                    <>
                         {listUsers.map((user) => {
 
                             return (
                                 <div key={user.id} className={+user.age >= 30 ? "green" : "red"}>
-                                    <div>My name {user.name}</div>
-                                    <div>My age {user.age}</div>
+                                    <div>
+                                        <div>My name {user.name}</div>
+                                        <div>My age {user.age}</div>
+                                    </div>
+                                    <div>
+                                        <button onClick={() => this.props.handleDeleteUser(user.id)}>Delete</button>
+                                    </div>
                                     <hr />
                                 </div>
+
                             )
 
 
@@ -45,7 +66,7 @@ class DisplayInfor extends React.Component {
                         })}
                         {/* <div>My Name {name}</div>
                 <div>My age {age}</div> */}
-                    </div>
+                    </>
                 }
             </div>
         )
