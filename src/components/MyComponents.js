@@ -2,7 +2,7 @@
 // function component
 
 import React from "react";
-import UserInfor from "./UserInfor";
+import AddUserInfor from "./AddUserInfor";
 import DisplayInfor from "./DisplayInfor";
 
 
@@ -15,12 +15,23 @@ class MyComponent extends React.Component {
         ]
     }
 
+    handleAddNewUser = (objUser) => {
+
+        this.setState({
+            listUsers: [objUser, ...this.state.listUsers]
+        })
+
+
+    }
+
     //JSX
     render() {
         //DRY: don't repeat youseft
         return (
             <div>
-                <UserInfor />
+                <AddUserInfor
+                    handleAddNewUser={this.handleAddNewUser}
+                />
                 <br />
                 <DisplayInfor listUsers={this.state.listUsers} />
             </div>
