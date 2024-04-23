@@ -8,10 +8,75 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+
 .app-container {
   .header-container {
+    button.btn-login {
+      height: 30px;
+      border-radius: 5px;
+      margin-right: 15px;
+      padding: 0 15px;
+      border: 1px solid rgb(78, 77, 77);
+    }
+
+    button.btn-signup {
+      border-radius: 5px;
+      margin-right: 15px;
+      padding: 0 15px;
+      border: 1px solid rgb(78, 77, 77);
+      background-color: rgb(83, 81, 81);
+      color: white;
+      height: 30px;
+
+      &:hover {
+        background: black;
+      }
+    }
+
     .navbar-nav {
-      --bs-nav-link-hover-color: red;
+      .nav-link {
+        &.active {
+          color: skyblue;
+        }
+      }
     }
   }
+
+  .homepage-container {
+    .homepage-content {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      padding: 80px;
+      gap: 30px;
+    }
+
+    .title-1 {
+      font-size: 35px;
+      font-weight: 600;
+    }
+
+    .title-2 {
+      font-size: 20px;
+    }
+
+    .title-3 {
+      button {
+        border-radius: 5px;
+        background-color: black;
+        color: white;
+        padding: 5px 25px;
+      }
+    }
+  }
+
+}
+
+video {
+  width: 500px;
+  height: 400px;
+  position: fixed;
+  right: 0;
+  margin-right: 30px;
 }
