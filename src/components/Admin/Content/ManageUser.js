@@ -5,13 +5,15 @@ import { FcPlus } from "react-icons/fc";
 import { useState } from 'react';
 import TableUser from './TableUser';
 import { useEffect } from "react";
-import { getAllUser } from '../../../services/apiServices'
+import { getAllUser, pageInateUser } from '../../../services/apiServices'
 import ModalUpdateUser from './ModalUpdateUser';
 import ModalDeleteUser from './ModalDeleteUser';
 import ModalViewUser from './ModalViewUser';
+import TableUserPageinate from './TableUserPageinate';
+
 
 const ManageUser = (props) => {
-
+    const LIMIT_USER_PAGE = 5;
     const [showModalCreateUser, setShowModalCreateUser] = useState(false);
     const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
     const [showModalViewUser, setShowModalViewUser] = useState(false);
@@ -21,15 +23,26 @@ const ManageUser = (props) => {
     const [listUser, setListUser] = useState([]);
     const [dataDelete, setDataDelete] = useState({});
     const [dataView, setdataView] = useState({});
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPage, setTotalPage] = useState(0);
     useEffect(() => {
-        fetchListUser();
+        // fetchListUser();
+        fetchListUserWithPageinate(1);
     }, []);
 
 
     const fetchListUser = async () => {
         let res = await getAllUser();
         if (res.EC === 0) {
-            setListUser(res.DT);
+            setListUser(res.DT.users);
+        }
+    }
+
+    const fetchListUserWithPageinate = async (page) => {
+        let res = await pageInateUser(page, LIMIT_USER_PAGE);
+        if (res.EC === 0) {
+            setListUser(res.DT.users);
+            setTotalPage(res.DT.totalPages)
         }
     }
 
@@ -63,17 +76,31 @@ const ManageUser = (props) => {
                     </button>
                 </div>
                 <div className='table-user-container'>
-                    <TableUser
+                    {/* <TableUser
                         listUser={listUser}
                         handleClickBtnUpdate={handleClickBtnUpdate}
                         handleClickBtnDelete={handleClickBtnDelete}
                         handleClickBtnView={handleClickBtnView}
+                    /> */}
+                    <TableUserPageinate
+                        listUser={listUser}
+                        handleClickBtnUpdate={handleClickBtnUpdate}
+                        handleClickBtnDelete={handleClickBtnDelete}
+                        handleClickBtnView={handleClickBtnView}
+                        totalPage={totalPage}
+                        fetchListUserWithPageinate={fetchListUserWithPageinate}
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
                     />
+
                 </div>
                 <ModalCreateUser
                     show={showModalCreateUser}
                     setShow={setShowModalCreateUser}
                     fetchListUser={fetchListUser}
+                    fetchListUserWithPageinate={fetchListUserWithPageinate}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
                 />
                 <ModalUpdateUser
                     show={showModalUpdateUser}
@@ -81,13 +108,20 @@ const ManageUser = (props) => {
                     dataUpdate={dataUpdate}
                     fetchListUser={fetchListUser}
                     resetUpdateData={resetUpdateData}
+                    fetchListUserWithPageinate={fetchListUserWithPageinate}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
                 />
                 <ModalDeleteUser
                     show={showModalDeleteUser}
                     setShow={setShowModalDeleteUser}
                     dataDelete={dataDelete}
                     fetchListUser={fetchListUser}
+                    fetchListUserWithPageinate={fetchListUserWithPageinate}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
                 />
+
                 <ModalViewUser
                     show={showModalViewUser}
                     setShow={setShowModalViewUser}

@@ -24,6 +24,17 @@ const deleteUser = (userId) => {
     return axios.delete('api/v1/participant', { data: { id: userId } });
 }
 
+const pageInateUser = (page, limit) => {
+    return axios.get(`api/v1/participant?page=${page}&limit=${limit}`);
+}
+
+const postLogin = (email, password, delay) => {
+    return axios.post('api/v1/login', { email: email, password: password, delay: 5000 })
+}
+
+const postSignup = (email, username, password) => {
+    return axios.post('api/v1/register', { email: email, username: username, password: password })
+}
 
 
-export { postCreateNewUser, getAllUser, putUpdateUser, deleteUser }
+export { postCreateNewUser, getAllUser, putUpdateUser, deleteUser, pageInateUser, postLogin, postSignup }

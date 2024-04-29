@@ -9,6 +9,7 @@
     "axios": "0.27.2",
     "bootstrap": "5.3.3",
     "lodash": "4.17.21",
+    "nprogress": "0.2.0",
     "react": "18.2.0",
     "react-bootstrap": "2.10.2",
     "react-dom": "18.2.0",
@@ -18,11 +19,13 @@
     "react-redux": "8.0.1",
     "react-router-dom": "6.22.3",
     "react-scripts": "5.0.1",
-    "react-toastify": "^9.0.7",
+    "react-toastify": "9.0.7",
     "redux": "4.2.0",
     "redux-devtools-extension": "2.13.9",
+    "redux-persist": "6.0.0",
     "redux-thunk": "2.4.1",
     "sass": "1.53.0",
+    "sweetpagination": "1.0.15",
     "web-vitals": "2.1.4"
   },
   "scripts": {

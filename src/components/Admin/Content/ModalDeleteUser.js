@@ -15,7 +15,9 @@ const ModalDeleteUser = (props) => {
         if (data && data.EC === 0) {
             toast.success(data.EM);
             handleClose();
-            await props.fetchListUser();
+            //await props.fetchListUser();
+            props.setCurrentPage(1);
+            await props.fetchListUserWithPageinate(1)
         }
 
         if (data.EC !== 0) {
