@@ -1,8 +1,11 @@
 import videoHomePage from '../../assets/vdeo-homepage.mp4'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 const HomePage = (props) => {
     const isAuthenticated = useSelector(state => state.account.isAuthenticated)
-    const account = useSelector(state => state.account.account)
+    const navigate = useNavigate();
+
+
     return (
         <div className="homepage-container">
             <video autoPlay muted loop>
@@ -19,7 +22,11 @@ const HomePage = (props) => {
                     Get more data—like signups, feedback, and anything else—with forms designed to be refreshingly different.
                 </div>
                 <div className='title-3'>
-                    <button>Get started it's free</button>
+                    {isAuthenticated === false ?
+                        <button onClick={() => navigate('/login')}>Get started it's free</button>
+                        :
+                        <button onClick={() => navigate('/users')}>Doing quiz now</button>
+                    }
                 </div>
             </div>
         </div>
