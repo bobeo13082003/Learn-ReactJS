@@ -24,7 +24,7 @@ const instance = axios.create({
 
 // Add a request interceptor
 instance.interceptors.request.use(function (config) {
-    console.log('>>> check', store.getState());
+    // console.log('>>> check', store.getState());
     const access_token = store?.getState()?.account?.account?.access_token;
     config.headers['Authorization'] = `Bearer ${access_token}`;
     NProgress.start();
